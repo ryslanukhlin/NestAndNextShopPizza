@@ -1,13 +1,22 @@
-import { Button } from '@material-ui/core'
 import React from 'react'
-import { useSelector } from 'react-redux'
+import Catalog from '../component/Catalog'
+import { GetStaticProps } from 'next'
+import { PizzaProps } from '../types/proptype/pizza.type'
 
-const Index = () => {
-    const state = useSelector(state => state.number)
-
+const Index: React.FC<{pizza: PizzaProps[]}> = ({pizza}) => {
     return (
-        <Button>{state}</Button>
+        <Catalog pizza={pizza} />
     )
+}
+
+
+export const getStaticProps: GetStaticProps = async () => {
+    const res  = await fetch("http://localhost:8000/product")
+    const pizza = await res.json()
+
+    return {
+        props: { pizza }
+    }
 }
 
 export default Index
