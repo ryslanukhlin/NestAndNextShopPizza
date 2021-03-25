@@ -1,4 +1,4 @@
-export type PizzaProps = {
+export type TPizza = {
     image: string | null
     _id: string
     price: number

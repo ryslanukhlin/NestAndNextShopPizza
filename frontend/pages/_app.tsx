@@ -4,7 +4,8 @@ import NavBar from "../component/Navbar"
 import "../style/index.scss";
 import { createWrapper } from "next-redux-wrapper";
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-
+import { useEffect } from "react";
+import { useAction } from "../hooks/useAction";
 
 const theme = createMuiTheme({
     palette: {
@@ -18,6 +19,15 @@ const theme = createMuiTheme({
 })
 
 const MyApp = ({ Component, pageProps }) => {
+    const { addPizzaToBasket } = useAction()
+
+    useEffect(() => {
+        const pizzaBasket = JSON.parse(localStorage.getItem('pizzaBasket'))
+        if(pizzaBasket){
+            pizzaBasket.map(item => addPizzaToBasket(item))
+        }
+    }, [])
+
     return (
         <Provider store={store}>
             <ThemeProvider theme={theme}>

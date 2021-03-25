@@ -1,9 +1,9 @@
 import React from 'react'
 import Catalog from '../component/Catalog'
 import { GetStaticProps } from 'next'
-import { PizzaProps } from '../types/proptype/pizza.type'
+import { TPizza } from '../types/pizza.type'
 
-const Index: React.FC<{pizza: PizzaProps[]}> = ({pizza}) => {
+const Index: React.FC<{pizza: TPizza[]}> = ({pizza}) => {
     return (
         <Catalog pizza={pizza} />
     )

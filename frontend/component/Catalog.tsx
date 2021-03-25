@@ -3,10 +3,10 @@ import { Container, Grid } from '@material-ui/core'
 import style from "../style/catalog.module.scss"
 import CatalogItem from './CatalogItem';
 import { GetStaticProps } from 'next'
-import { PizzaProps } from '../types/proptype/pizza.type';
+import { TPizza } from '../types/pizza.type';
 
 
-const Catalog: React.FC<{pizza: PizzaProps[]}> = ({pizza}) => {
+const Catalog: React.FC<{pizza: TPizza[]}> = ({pizza}) => {
     return (
         <Container maxWidth="xl" >
         <Grid container spacing={4} className={style.cardWrapper}>
