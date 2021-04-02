@@ -1,15 +1,25 @@
 import React from "react"
-import { IconButton, List, ListItemSecondaryAction, ListItemText, Container, Typography, ListItemAvatar, ListItem, Avatar, TextField } from "@material-ui/core"
-import DeleteIcon from '@material-ui/icons/Delete';
+import { List, Container, Typography, Button } from "@material-ui/core"
 import { useTypedSelector } from "../hooks/useTypeSelector";
 import style from "../style/basket.module.scss"
 import { useAction } from "../hooks/useAction";
+import BasketItem from "../component/BasketItem";
+import { useRouter } from 'next/dist/client/router';
 
 const Basket: React.FC = () => {
-    const pizzaBasket = useTypedSelector(state => state.basketReducer.basketPizza)
-    const { removePizzaToBasket } = useAction()
+    const router = useRouter()
+    const { basketPizza, allPrice } = useTypedSelector(state => state.basketReducer)
+    const { setAllPrice } = useAction()
 
-    if(pizzaBasket.length == 0){
+    React.useEffect(() => {
+        setAllPrice()
+    }, [basketPizza.length])
+
+    const toOrderClick = (): void => {
+        router.push('/order')
+    }
+
+    if(basketPizza.length == 0){
         return <Typography className={style.basketTitle} variant="h2">Basket is null</Typography>
     }
 
@@ -17,29 +27,15 @@ const Basket: React.FC = () => {
         <Container maxWidth="md">
             <Typography className={style.basketTitle} variant="h2">Basket</Typography>
             <List>
-                {pizzaBasket.map(pizza => 
-                    <ListItem key={pizza._id}>
-                        <ListItemAvatar>
-                            <Avatar>
-                                <img className={style.basketImage} src={'http://localhost:8000/' + pizza.image} />
-                            </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText 
-                            className={style.basketText}
-                            primary={pizza.name}
-                            secondary={pizza.description}
-                        />
-                        <TextField className={style.basketInputCount}  type="number" label="count"/>
-                        <Typography variant="h6">{pizza.price} ₽</Typography>
-                        <ListItemSecondaryAction onClick={removePizzaToBasket.bind(null, pizza._id)}>
-                            <IconButton>
-                                <DeleteIcon />
-                            </IconButton>
-                        </ListItemSecondaryAction>
-                    </ListItem>
+                {basketPizza.map(pizza => 
+                    <BasketItem key={pizza._id} pizza={pizza} />
                 )}
             </List>
             <div className={style.customHr} />
+            <div className={style.orderWrapper}>
+                <Typography style={{ flexGrow: 1 }} variant="h5">Total Price: {allPrice} ₽</Typography>
+                <Button variant="contained" color="secondary" onClick={toOrderClick}>Order</Button>
+            </div>
         </Container>
     )   
 }

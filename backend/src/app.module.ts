@@ -4,6 +4,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { ProductModule } from './product/product.module';
 import { FileModule } from './file/file.module';
+import { OrderModule } from './order/order.module';
 import * as path from 'path';
 
 @Module({
@@ -14,7 +15,8 @@ import * as path from 'path';
             rootPath: path.resolve(__dirname, 'static')
         }),
         ProductModule,
-        FileModule
+        FileModule,
+        OrderModule
     ]
 })
 export class AppModule {}

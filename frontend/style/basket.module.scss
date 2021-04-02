@@ -11,6 +11,12 @@
     background-color: rgba(0, 0, 0, 0.54);
     height: 1px;
     width: 100%;
+	margin-bottom: 5px;
+}
+
+.orderWrapper{
+	display: flex;
+	align-items: center;
 }
 
 .basketText{
@@ -22,4 +28,31 @@
     margin-left: 5px !important;
     margin-right: 20px !important;
     margin-bottom: 18px !important;
+}
+
+.row {
+	text-align: center;
+    width: 50px;
+	margin: 0 20px 0 0;
+	padding: 20px 0;
+}
+
+.customInput {
+	background-color: #eee;
+	vertical-align: top;
+	outline: none;
+	padding: 0;
+	height: 40px;
+	line-height: 40px;    
+	text-indent: 10px;
+	display: inline-block;
+	width: 100%;
+	box-sizing: border-box;
+	border: 1px solid #ddd;
+	font-size: 14px;
+	border-radius: 3px;
+} 
+
+.customInput:focus {
+	outline: 2px solid blue;
 }
