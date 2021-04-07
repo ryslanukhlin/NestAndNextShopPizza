@@ -16,7 +16,8 @@ export enum BasketActionEnum {
     ADD_BASKET_ITEM = "ADD_BASKET_ITEM",
     REMOVE_BASKET_ITEM = "REMOVE_BASKET_ITEM",
     SET_ALLPRICE = "SET_ALLPRICE",
-    SET_COUNTPRICE = "SET_COUNTPRICE"
+    SET_COUNTPRICE = "SET_COUNTPRICE",
+    CLEAR_BASKET = "CLEAR_BASKET"
 }
 
 export type AddBasket = {
@@ -43,4 +44,8 @@ export type SetCountPrice = {
     payload: TPayloadSecCountPrice
 }
 
-export type TBasketAction = AddBasket | RemoveBasket | SetAllPrice | SetCountPrice;
+export type ClearBasket = {
+    type: BasketActionEnum.CLEAR_BASKET
+}
+
+export type TBasketAction = AddBasket | RemoveBasket | SetAllPrice | SetCountPrice | ClearBasket;

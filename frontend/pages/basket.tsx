@@ -15,7 +15,7 @@ const Basket: React.FC = () => {
         setAllPrice()
     }, [basketPizza.length])
 
-    const toOrderClick = (): void => {
+    const toOrder = (): void => {
         router.push('/order')
     }
 
@@ -34,7 +34,7 @@ const Basket: React.FC = () => {
             <div className={style.customHr} />
             <div className={style.orderWrapper}>
                 <Typography style={{ flexGrow: 1 }} variant="h5">Total Price: {allPrice} ₽</Typography>
-                <Button variant="contained" color="secondary" onClick={toOrderClick}>Order</Button>
+                <Button variant="contained" color="secondary" onClick={toOrder}>Order</Button>
             </div>
         </Container>
     )   

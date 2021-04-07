@@ -6,6 +6,7 @@ import "../style/index.scss";
 import { createWrapper } from "next-redux-wrapper";
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { useAction } from "../hooks/useAction";
+import { SnackbarProvider } from 'notistack';
 
 const theme = createMuiTheme({
     palette: {
@@ -31,8 +32,11 @@ const MyApp = ({ Component, pageProps }) => {
     return (
         <Provider store={store}>
             <ThemeProvider theme={theme}>
-                <NavBar />
-                <Component {...pageProps} />
+                <SnackbarProvider maxSnack={3}>
+                    <NavBar />
+                    <Component {...pageProps} />
+                </SnackbarProvider>
+
             </ThemeProvider>
         </Provider>
     )

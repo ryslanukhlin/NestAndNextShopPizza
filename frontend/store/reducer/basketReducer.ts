@@ -1,4 +1,4 @@
-import { BasketActionEnum, TBasketAction, TBasketState, AddBasket, RemoveBasket, SetAllPrice, SetCountPrice, TPayloadSecCountPrice } from "../../types/reducer/baskeReducer.type"
+import { BasketActionEnum, TBasketAction, TBasketState, AddBasket, RemoveBasket, SetAllPrice, SetCountPrice, TPayloadSecCountPrice, ClearBasket } from "../../types/reducer/baskeReducer.type"
 import { TPizza } from "../../types/pizza.type"
 
 const defaultState: TBasketState = {
@@ -28,6 +28,9 @@ export const basketReducer = (state = defaultState, action: TBasketAction): TBas
                 return item
             })
             return { ...state, basketPizza: newBasketPizza, allPrice: newBasketPizza.reduce((prev, item) => prev += item.countPrice, 0)}
+        case BasketActionEnum.CLEAR_BASKET:
+            localStorage.removeItem('pizzaBasket')
+            return {basketPizza: [], allPrice: 0}
         default:
             return state
     }
@@ -37,3 +40,4 @@ export const addPizzaToBasket = (payload: TPizza): AddBasket => ({ type: BasketA
 export const removePizzaToBasket = (payload: string): RemoveBasket => ({ type: BasketActionEnum.REMOVE_BASKET_ITEM, payload })
 export const setAllPrice = (): SetAllPrice => ({ type: BasketActionEnum.SET_ALLPRICE })
 export const setCountPrice = (payload: TPayloadSecCountPrice): SetCountPrice => ({ type: BasketActionEnum.SET_COUNTPRICE, payload })
+export const clearBasket = (): ClearBasket => ({ type: BasketActionEnum.CLEAR_BASKET }) 
