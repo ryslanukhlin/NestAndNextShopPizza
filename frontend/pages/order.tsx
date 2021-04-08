@@ -5,7 +5,7 @@ import { TOrderForm, TProductParams } from "../types/form/order-form.type";
 import InputMask from 'react-input-mask';
 import getConfig from 'next/config'
 import { useTypedSelector } from "../hooks/useTypeSelector";
-import { useSnackbar } from 'notistack';
+import { SnackbarKey, useSnackbar } from 'notistack';
 import { useAction } from "../hooks/useAction";
 
 const { publicRuntimeConfig } = getConfig();
@@ -25,7 +25,8 @@ const Order: React.FC = () => {
         setOrderForm({...formOrder, [e.target.name]: e.target.value})
     }
 
-    const addOrder = async (): Promise<void> => {
+    const addOrder = async (): Promise<void | SnackbarKey> => {
+        if(basketPizza.length === 0) return enqueueSnackbar("basket null", { variant: "error" });
         const productParams = basketPizza.map((item): TProductParams => {
             return { productId: item._id, count: item.count}
         })
@@ -39,6 +40,11 @@ const Order: React.FC = () => {
         if(response.status === 201){
             enqueueSnackbar('is Add Order', { variant: "success" })
             clearBasket()
+            let clearForm: TOrderForm = formOrder;
+            for(let orderItem in formOrder){
+                clearForm[orderItem] = ""
+            }
+            setOrderForm({...clearForm})
         }
         const data = await response.json()
         if(response.status === 400){
