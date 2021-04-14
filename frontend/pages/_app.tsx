@@ -8,7 +8,7 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { useAction } from "../hooks/useAction";
 import { SnackbarProvider } from 'notistack';
 
-const theme = createMuiTheme({
+export const theme = createMuiTheme({
     palette: {
         primary: {
             main: '#FFDE03'
@@ -29,14 +29,20 @@ const MyApp = ({ Component, pageProps }) => {
         }
     }, [])
 
+    React.useEffect(() => {
+        const jssStyles = document.querySelector('#jss-server-side')
+        if (jssStyles && jssStyles.parentElement) {
+          jssStyles.parentElement.removeChild(jssStyles)
+        }
+    }, [])
+
     return (
         <Provider store={store}>
             <ThemeProvider theme={theme}>
-                <SnackbarProvider maxSnack={3}>
+                <SnackbarProvider maxSnack={10}>
                     <NavBar />
                     <Component {...pageProps} />
                 </SnackbarProvider>
-
             </ThemeProvider>
         </Provider>
     )

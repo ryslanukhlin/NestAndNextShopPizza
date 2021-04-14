@@ -3,8 +3,10 @@ import { AppBar, Badge, IconButton, List, ListItem, ListItemText, SwipeableDrawe
 import MenuIcon from '@material-ui/icons/Menu';
 import style from "../style/navbar.module.scss";
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { useRouter } from 'next/dist/client/router';
 import { useTypedSelector } from '../hooks/useTypeSelector';
+import Auth from './Auth/Auth';
 
 const navbarItems = [
     {txt: 'main', link: '/'},
@@ -12,15 +14,24 @@ const navbarItems = [
     {txt: 'blog', link: '/blog'},
 ]
 
-const Navbar = () => {
+const Navbar: React.FC = () => {
     const router = useRouter()
-    const [close, setClose] = React.useState(false)
+    const [open, setOpen] = React.useState<boolean>(true);
+    const [close, setClose] = React.useState<boolean>(false)
     const pizzaBasket = useTypedSelector(state => state.basketReducer.basketPizza)
 
-    const RouteToLink = (link: string): void => {
+    const RouteToLink = async (link: string): Promise<void> => {
         setClose(false)
-        router.push(link)
+        await router.push(link)
     }
+
+    const handleClickOpen = (): void => {
+        setOpen(true);
+    };
+
+    const handleClose = (): void => {
+        setOpen(false);
+    };
     
     return (
         <>
@@ -37,6 +48,9 @@ const Navbar = () => {
                             <ShoppingBasketIcon />
                         </Badge>
                     </IconButton>
+                    <IconButton onClick={handleClickOpen}>
+                        <AccountCircleIcon />
+                    </IconButton>
                 </Toolbar>
             </AppBar>
             <SwipeableDrawer
@@ -52,6 +66,7 @@ const Navbar = () => {
                     )}
                 </List>
             </SwipeableDrawer>
+            <Auth open={open} handleClose={handleClose}/>
         </>
     )
 }

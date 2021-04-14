@@ -2,11 +2,12 @@ import React from "react";
 import { Button, Container, TextField, Typography } from "@material-ui/core";
 import style from "../style/order.module.scss"
 import { TOrderForm, TProductParams } from "../types/form/order-form.type";
-import InputMask from 'react-input-mask';
+import InputMask from "react-input-mask";
 import getConfig from 'next/config'
 import { useTypedSelector } from "../hooks/useTypeSelector";
 import { SnackbarKey, useSnackbar } from 'notistack';
 import { useAction } from "../hooks/useAction";
+React.useLayoutEffect = React.useEffect; 
 
 const { publicRuntimeConfig } = getConfig();
 
@@ -64,7 +65,7 @@ const Order: React.FC = () => {
                 name="name"
                 fullWidth 
                 label="your name" 
-                variant="filled" 
+                variant="outlined" 
             />
             <TextField 
                 className={style.orderInput} 
@@ -73,15 +74,16 @@ const Order: React.FC = () => {
                 name="adress"
                 fullWidth 
                 label="adress" 
-                variant="filled" 
+                variant="outlined" 
             />
-              <InputMask mask="+7 (999) 999-9999" value={formOrder.tell} name="tell" onChange={formChange}>
-                <TextField
-                  variant="filled"
-                  fullWidth
-                  label="tell"
-                />
-              </InputMask>
+            <InputMask
+                mask="+7(999) 9999 99-99"
+                name="tell"
+                value={formOrder.tell}
+                onChange={formChange}
+            >
+                <TextField label="tell"  fullWidth variant="outlined" type="tell" />
+            </InputMask>
             <TextField 
                 className={style.orderInput} 
                 value={formOrder.optionst}
@@ -91,7 +93,7 @@ const Order: React.FC = () => {
                 multiline 
                 rows={4} 
                 label="optionst"
-                variant="filled" 
+                variant="outlined" 
             />
             <div className={style.actions}>
                 <Button variant="contained" color="secondary" onClick={addOrder}>Order</Button>

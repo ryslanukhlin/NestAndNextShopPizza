@@ -1,22 +1,28 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { ProductModule } from './product/product.module';
 import { FileModule } from './file/file.module';
 import { OrderModule } from './order/order.module';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
 import * as path from 'path';
 
 @Module({
     imports: [
-        ConfigModule.forRoot(),
+        ConfigModule.forRoot({
+            isGlobal: true
+        }),
         MongooseModule.forRoot(process.env.mongodbUri),
         ServeStaticModule.forRoot({
             rootPath: path.resolve(__dirname, 'static')
         }),
         ProductModule,
         FileModule,
-        OrderModule
+        OrderModule,
+        AuthModule,
+        UsersModule
     ]
 })
 export class AppModule {}

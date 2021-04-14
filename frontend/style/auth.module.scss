@@ -1,0 +1,38 @@
+.wrapper{
+    display: flex;
+    height: 460px;
+}
+
+.bg{
+    width: 50%;
+}
+
+.form{
+    width: 100%;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.modalFooter{
+    margin: 8px 0;
+}
+
+.customLink:hover{
+    text-decoration:underline;
+}
+
+.auth__googleBtn{
+    text-decoration: none;
+}
+
+.auth__google{
+    height: 18px;
+}
+
+@media (max-width: 940px){
+    .bg{
+        display: none;
+    }
+}
