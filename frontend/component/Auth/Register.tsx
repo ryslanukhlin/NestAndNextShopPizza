@@ -7,7 +7,7 @@ import { useSnackbar } from 'notistack';
 
 const { publicRuntimeConfig } = getConfig();
 
-const Register: React.FC<{ goLogin: MouseEventHandler }> = ({ goLogin }) => {
+const RegisterPage: React.FC<{ goLogin: MouseEventHandler }> = ({ goLogin }) => {
     const { enqueueSnackbar } = useSnackbar();
     const [registerForm, setRegisterForm] = React.useState<TRegisterForm>({
         nicname: "",
@@ -118,4 +118,4 @@ const Register: React.FC<{ goLogin: MouseEventHandler }> = ({ goLogin }) => {
     )
 }
 
-export default Register
+export default RegisterPage

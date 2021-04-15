@@ -2,10 +2,17 @@ import React, { MouseEventHandler } from 'react';
 import { Button, Checkbox, FormControlLabel, Grid, TextField, Typography } from '@material-ui/core';
 import style from '../../style/auth.module.scss';
 import { TLoginForm } from '../../types/form/login-form.type';
+import getConfig from 'next/config'
+import { useSnackbar } from 'notistack';
+import { useAction } from '../../hooks/useAction';
 
-const Login: React.FC<{ goRegister: MouseEventHandler}> = ({ goRegister }) => {
+const { publicRuntimeConfig } = getConfig();
+
+const LoginPage: React.FC<{ goRegister: MouseEventHandler}> = ({ goRegister }) => {
+    const { Login } = useAction();
+    const { enqueueSnackbar } = useSnackbar();
     const [loginForm, setLoginForm] = React.useState<TLoginForm>({
-        nicname: "",
+        email: "",
         password: ""
     });
 
@@ -13,11 +20,27 @@ const Login: React.FC<{ goRegister: MouseEventHandler}> = ({ goRegister }) => {
         setLoginForm({...loginForm, [e.target.name]: e.target.value})
     }
 
+    const login = async (): Promise<void> => {
+        const response = await fetch(publicRuntimeConfig.backendUri + "/auth", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({...loginForm})
+        });
+        if(response.status !== 201){
+            enqueueSnackbar("invalid password or email", { variant: "error" });
+        } else {
+            const data = await response.json()
+            Login(data.access_token)
+        }
+    }
+
     return (
         <div>
             <Typography variant="h6">Вход на FamulyPizza</Typography>
             <TextField
-                value={loginForm.nicname}
+                value={loginForm.email}
                 onChange={changeForm}
                 size="small"
                 variant="outlined"
@@ -48,6 +71,7 @@ const Login: React.FC<{ goRegister: MouseEventHandler}> = ({ goRegister }) => {
                 label="Remember me"
             />
             <Button
+                onClick={login}
                 type="submit"
                 fullWidth
                 variant="contained"
@@ -75,4 +99,4 @@ const Login: React.FC<{ goRegister: MouseEventHandler}> = ({ goRegister }) => {
     )
 }
 
-export default Login
+export default LoginPage

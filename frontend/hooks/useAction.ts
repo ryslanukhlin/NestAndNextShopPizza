@@ -1,13 +1,16 @@
 import { useDispatch } from "react-redux"
 import { bindActionCreators } from "redux"
 import { addPizzaToBasket, removePizzaToBasket, setAllPrice, setCountPrice, clearBasket } from "../store/reducer/basketReducer"
+import { Login, Logout} from "../store/reducer/userReducer"
 
 const actionCreater = {
     addPizzaToBasket,
     removePizzaToBasket,
     setAllPrice,
     setCountPrice,
-    clearBasket
+    clearBasket,
+    Login,
+    Logout
 }
 
 export const useAction = () => {
