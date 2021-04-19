@@ -5,11 +5,12 @@ import { TLoginForm } from '../../types/form/login-form.type';
 import getConfig from 'next/config'
 import { useSnackbar } from 'notistack';
 import { useAction } from '../../hooks/useAction';
+import GoogleLogin, { GoogleLoginResponse } from "react-google-login";
 
 const { publicRuntimeConfig } = getConfig();
 
 const LoginPage: React.FC<{ goRegister: MouseEventHandler}> = ({ goRegister }) => {
-    const { Login } = useAction();
+    const { LoginLocal, LoginGoogle } = useAction();
     const { enqueueSnackbar } = useSnackbar();
     const [loginForm, setLoginForm] = React.useState<TLoginForm>({
         email: "",
@@ -32,8 +33,16 @@ const LoginPage: React.FC<{ goRegister: MouseEventHandler}> = ({ goRegister }) =
             enqueueSnackbar("invalid password or email", { variant: "error" });
         } else {
             const data = await response.json()
-            Login(data.access_token)
+            LoginLocal(data.access_token)
         }
+    }
+
+    const responseSuccessGoogle = (response: GoogleLoginResponse): void => {
+        LoginGoogle(response.accessToken)
+    }
+    
+    const responseErrorGoogle = (): void => {
+        enqueueSnackbar("не удалось войти в гугл", { variant: "error" });
     }
 
     return (
@@ -87,14 +96,14 @@ const LoginPage: React.FC<{ goRegister: MouseEventHandler}> = ({ goRegister }) =
                     </Typography>
                 </Grid>
             </Grid>
-            <a href="http://localhost:8000/auth/google" className={style.auth__googleBtn}>
-                <Button 
-                    variant="contained" 
-                    fullWidth 
-                    startIcon={<img className={style.auth__google}
-                    src="/googleIcon.png" 
-                />}>Auth Google</Button>
-            </a>
+            <GoogleLogin
+                className={style.auth__google}
+                clientId="1039089113540-k5pkcpnsa4eq6446risiup8sh6cn418g.apps.googleusercontent.com"
+                buttonText="Login"
+                onSuccess={responseSuccessGoogle}
+                onFailure={responseErrorGoogle}
+                cookiePolicy={'single_host_origin'}
+            />
         </div>
     )
 }

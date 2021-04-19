@@ -19,6 +19,7 @@
     "npm": "^7.6.3",
     "react": "17.0.1",
     "react-dom": "17.0.1",
+    "react-google-login": "^5.2.2",
     "react-input-mask": "^3.0.0-alpha.2",
     "react-redux": "^7.2.2",
     "react-text-mask": "^5.4.3",

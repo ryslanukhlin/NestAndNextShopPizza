@@ -16,9 +16,10 @@ const navbarItems = [
 
 const Navbar: React.FC = () => {
     const router = useRouter()
-    const [open, setOpen] = React.useState<boolean>(true);
+    const [open, setOpen] = React.useState<boolean>(false)
     const [close, setClose] = React.useState<boolean>(false)
     const pizzaBasket = useTypedSelector(state => state.basketReducer.basketPizza)
+    const { isAuth } = useTypedSelector(state => state.userReducer)
 
     const RouteToLink = async (link: string): Promise<void> => {
         setClose(false)
@@ -48,9 +49,14 @@ const Navbar: React.FC = () => {
                             <ShoppingBasketIcon />
                         </Badge>
                     </IconButton>
-                    <IconButton onClick={handleClickOpen}>
-                        <AccountCircleIcon />
-                    </IconButton>
+                    {isAuth?
+                        <IconButton onClick={router.push.bind(null, '/user')}>
+                            <AccountCircleIcon />
+                        </IconButton>
+                    :
+                        <IconButton onClick={handleClickOpen}>
+                            <AccountCircleIcon />
+                        </IconButton>}
                 </Toolbar>
             </AppBar>
             <SwipeableDrawer
@@ -66,7 +72,7 @@ const Navbar: React.FC = () => {
                     )}
                 </List>
             </SwipeableDrawer>
-            <Auth open={open} handleClose={handleClose}/>
+            <Auth open={open} handleClose={handleClose} />
         </>
     )
 }
