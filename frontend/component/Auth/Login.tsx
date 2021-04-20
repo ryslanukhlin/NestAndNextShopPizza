@@ -10,6 +10,7 @@ import GoogleLogin, { GoogleLoginResponse } from "react-google-login";
 const { publicRuntimeConfig } = getConfig();
 
 const LoginPage: React.FC<{ goRegister: MouseEventHandler, handleClose: Function}> = ({ goRegister, handleClose }) => {
+    const [remMe, setRemMe] = React.useState<boolean>(false);
     const { LoginLocal, LoginGoogle } = useAction();
     const { enqueueSnackbar } = useSnackbar();
     const [loginForm, setLoginForm] = React.useState<TLoginForm>({
@@ -35,6 +36,7 @@ const LoginPage: React.FC<{ goRegister: MouseEventHandler, handleClose: Function
             const data = await response.json()
             LoginLocal(data.access_token)
             handleClose()
+            if (remMe) localStorage.setItem('token', data.access_token);
         }
     }
 
@@ -78,6 +80,8 @@ const LoginPage: React.FC<{ goRegister: MouseEventHandler, handleClose: Function
                 autoComplete="current-password"
             />
             <FormControlLabel
+                value={remMe}
+                onChange={setRemMe.bind(null, prev => !prev)}
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
             />
