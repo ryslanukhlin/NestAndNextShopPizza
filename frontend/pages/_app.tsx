@@ -40,8 +40,10 @@ const MyApp = ({ Component, pageProps }) => {
         <Provider store={store}>
             <ThemeProvider theme={theme}>
                 <SnackbarProvider maxSnack={10}>
-                    <NavBar />
-                    <Component {...pageProps} />
+                    <NavBar/>
+                    <div style={{marginTop: 70}}>
+                        <Component {...pageProps} />
+                    </div>
                 </SnackbarProvider>
             </ThemeProvider>
         </Provider>

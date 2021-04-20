@@ -1,4 +1,15 @@
-import { BasketActionEnum, TBasketAction, TBasketState, AddBasket, RemoveBasket, SetAllPrice, SetCountPrice, TPayloadSecCountPrice, ClearBasket } from "../../types/reducer/baskeReducer.type"
+import {
+    BasketActionEnum,
+    TBasketAction,
+    TBasketState,
+    AddBasket,
+    RemoveBasket,
+    SetAllPrice,
+    SetCountPrice,
+    TPayloadSecCountPrice,
+    ClearBasket,
+    TPizzaBasket
+} from "../../types/reducer/baskeReducer.type"
 import { TPizza } from "../../types/pizza.type"
 
 const defaultState: TBasketState = {
@@ -13,11 +24,12 @@ export const basketReducer = (state = defaultState, action: TBasketAction): TBas
             localStorage.setItem('pizzaBasket', JSON.stringify(state.basketPizza))
             return state
         case BasketActionEnum.REMOVE_BASKET_ITEM:
-            state = {...state, basketPizza: state.basketPizza.filter(pizza => pizza._id !== action.payload )}
+            const newPizza: Array<TPizzaBasket> = state.basketPizza.filter(pizza => pizza._id !== action.payload )
+            state = {...state, basketPizza: newPizza }
             localStorage.setItem('pizzaBasket', JSON.stringify(state.basketPizza))
             return state
         case BasketActionEnum.SET_ALLPRICE:
-            const allPrice = state.basketPizza.reduce((prev, item) => prev += item.price, 0)
+            const allPrice = state.basketPizza.reduce((prev, item) => prev += item.countPrice, 0)
             return {...state, allPrice}
         case BasketActionEnum.SET_COUNTPRICE:
             const newBasketPizza = state.basketPizza.map((item) => {

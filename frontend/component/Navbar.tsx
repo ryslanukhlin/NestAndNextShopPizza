@@ -36,7 +36,7 @@ const Navbar: React.FC = () => {
     
     return (
         <>
-            <AppBar position="static">
+            <AppBar position="fixed">
                 <Toolbar>
                     <IconButton color="inherit" onClick={setClose.bind(null, true)}>
                         <MenuIcon />

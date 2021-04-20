@@ -22,7 +22,7 @@ const Auth: React.FC<{open: boolean, handleClose: MouseEventHandler}> = ({open, 
                     <img src="/bg_auth.webp" alt="my_image" className={style.bg}/>
                     <div className={style.form}>
                         {isLogin?
-                            <Login goRegister={goRegister} />
+                            <Login handleClose={handleClose} goRegister={goRegister} />
                         :
                             <Register goLogin={goLogin} />
                         }

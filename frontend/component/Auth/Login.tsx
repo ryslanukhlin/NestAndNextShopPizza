@@ -9,7 +9,7 @@ import GoogleLogin, { GoogleLoginResponse } from "react-google-login";
 
 const { publicRuntimeConfig } = getConfig();
 
-const LoginPage: React.FC<{ goRegister: MouseEventHandler}> = ({ goRegister }) => {
+const LoginPage: React.FC<{ goRegister: MouseEventHandler, handleClose: Function}> = ({ goRegister, handleClose }) => {
     const { LoginLocal, LoginGoogle } = useAction();
     const { enqueueSnackbar } = useSnackbar();
     const [loginForm, setLoginForm] = React.useState<TLoginForm>({
@@ -34,11 +34,13 @@ const LoginPage: React.FC<{ goRegister: MouseEventHandler}> = ({ goRegister }) =
         } else {
             const data = await response.json()
             LoginLocal(data.access_token)
+            handleClose()
         }
     }
 
     const responseSuccessGoogle = (response: GoogleLoginResponse): void => {
         LoginGoogle(response.accessToken)
+        handleClose()
     }
     
     const responseErrorGoogle = (): void => {
