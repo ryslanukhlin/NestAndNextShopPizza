@@ -5,8 +5,8 @@ import { ProductService } from './product.service';
 import { Express } from 'express';
 import { FileService } from 'src/file/file.service';
 import { FuleTypeEnum } from '../file/enum/type-file.enum';
-import * as Mongoose from 'mongoose';
 import { IdValidatePipe } from './pipes/idValidate.pipe';
+import {ProductDocument} from "./schemas/product.schema";
 
 @Controller('product')
 export class ProductController {
@@ -20,7 +20,7 @@ export class ProductController {
 
     @Get(':id')
     @UsePipes(new IdValidatePipe())
-    async getPizzaById(@Param('id') id: Mongoose.Types.ObjectId){
+    async getPizzaById(@Param('id') id: ProductDocument){
         return await this.productService.getPizzaById(id)
     }
     

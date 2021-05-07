@@ -21,7 +21,6 @@ export const theme = createMuiTheme({
 
 const MyApp = ({ Component, pageProps }) => {
     const { addPizzaToBasket, LoginLocal } = useAction()
-
     React.useEffect(() => {
         const pizzaBasket = JSON.parse(localStorage.getItem('pizzaBasket'))
         if(pizzaBasket) pizzaBasket.map(item => addPizzaToBasket(item))

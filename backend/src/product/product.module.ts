@@ -12,6 +12,7 @@ import { Product, ProductSchema } from './schemas/product.schema';
         ])
     ],
     controllers: [ProductController],
-    providers: [ProductService, FileService]
+    providers: [ProductService, FileService],
+    exports: [ProductService]
 })
 export class ProductModule {}
