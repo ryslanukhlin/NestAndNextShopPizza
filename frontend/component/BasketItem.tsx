@@ -4,6 +4,9 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import style from "../style/basket.module.scss"
 import { TPizzaBasket } from "../types/reducer/baskeReducer.type";
 import { useAction } from "../hooks/useAction";
+import getConfig from "next/config";
+
+const { publicRuntimeConfig } = getConfig();
 
 const BasketItem: React.FC<{ pizza: TPizzaBasket }> = ({ pizza }) => {
     const [count, setCount] = React.useState<number>(1)
@@ -24,9 +27,9 @@ const BasketItem: React.FC<{ pizza: TPizzaBasket }> = ({ pizza }) => {
 
     return (
         <ListItem>
-            <ListItemAvatar>
+            <ListItemAvatar className={style.ListItemAvatar}>
                 <Avatar>
-                    <img className={style.basketImage} src={'http://localhost:8000/' + pizza.image} />
+                    <img className={style.basketImage} src={publicRuntimeConfig.backendUri + '/' + pizza.image} />
                 </Avatar>
             </ListItemAvatar>
             <ListItemText 
@@ -34,7 +37,7 @@ const BasketItem: React.FC<{ pizza: TPizzaBasket }> = ({ pizza }) => {
                 primary={pizza.name}
                 secondary={pizza.description}
             />
-            <Typography variant="body1">Количество: </Typography>
+            <Typography variant="body1">Кол-во:</Typography>
             <div className={style.row}>
                 <input 
                     className={style.customInput}
@@ -46,7 +49,7 @@ const BasketItem: React.FC<{ pizza: TPizzaBasket }> = ({ pizza }) => {
                     max="10" 
                 />
             </div>
-            <Typography variant="h6">{pizza.countPrice} ₽</Typography>
+            <Typography className={style.customTypography} variant="h6">{pizza.countPrice} ₽</Typography>
             <ListItemSecondaryAction onClick={removePizzaToBasket.bind(null, pizza._id)}>
                 <IconButton>
                     <DeleteIcon />

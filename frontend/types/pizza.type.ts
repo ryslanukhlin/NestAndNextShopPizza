@@ -1,7 +1,9 @@
+import {TUser} from "./reducer/userReducer.type";
+
 export type TComments = {
     _id: string
     text: string
-    userId: string
+    userId: TUser
     __v: number
 }
 

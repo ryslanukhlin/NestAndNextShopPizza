@@ -33,7 +33,7 @@
 .row {
 	text-align: center;
     width: 50px;
-	margin: 0 20px 0 0;
+	margin: 0 8px 0 8px;
 	padding: 20px 0;
 }
 
@@ -55,4 +55,38 @@
 
 .customInput:focus {
 	outline: 2px solid blue;
+}
+
+.customTypography{
+	margin-right: 0 !important;
+}
+
+@media (max-width: 920px) {
+	.basketText>p{
+		display: none;
+	}
+
+	.customTypography{
+		margin-right: 30px !important;
+	}
+}
+
+.ListItemAvatar{}
+
+@media (max-width: 470px) {
+	.ListItemAvatar{
+		display: none !important;
+	}
+	.customTypography{
+		margin-right: 8px !important;
+	}
+	.row{
+		width: 44px;
+	}
+}
+
+@media (max-width: 370px) {
+	.row{
+		margin: 0;
+	}
 }

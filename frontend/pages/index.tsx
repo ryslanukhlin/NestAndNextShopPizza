@@ -2,7 +2,9 @@ import React from 'react'
 import Catalog from '../component/Catalog'
 import { GetStaticProps } from 'next'
 import { TPizza } from '../types/pizza.type'
+import getConfig from "next/config";
 
+const { publicRuntimeConfig } = getConfig();
 
 const Index: React.FC<{pizza: TPizza[]}> = ({pizza}) => {
     return (
@@ -12,7 +14,7 @@ const Index: React.FC<{pizza: TPizza[]}> = ({pizza}) => {
 
 
 export const getStaticProps: GetStaticProps = async () => {
-    const res  = await fetch("http://localhost:8000/product")
+    const res  = await fetch(publicRuntimeConfig.backendUri + '/product')
     const pizza = await res.json()
 
     return {

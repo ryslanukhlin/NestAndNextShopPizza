@@ -3,6 +3,9 @@ import {Button, Container, Grid, Typography} from "@material-ui/core";
 import {useTypedSelector} from "../hooks/useTypeSelector";
 import {useAction} from "../hooks/useAction";
 import {TPizza} from "../types/pizza.type";
+import getConfig from "next/config";
+
+const { publicRuntimeConfig } = getConfig();
 
 const ItemPizzaId: React.FC<{ data: TPizza }> = ({ data }) => {
     const pizzaBasket = useTypedSelector(state => state.basketReducer.basketPizza)
@@ -12,7 +15,7 @@ const ItemPizzaId: React.FC<{ data: TPizza }> = ({ data }) => {
     return (
         <Grid container>
             <Grid xs={6} item>
-                <img src={'http://localhost:8000/' + data.image} alt="img"/>
+                <img src={publicRuntimeConfig.backendUri + '/' + data.image} alt="img"/>
             </Grid>
             <Grid xs={6} item>
                 <Typography variant="h3">{data.name}</Typography>

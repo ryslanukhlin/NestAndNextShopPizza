@@ -3,7 +3,7 @@ import React, { MouseEventHandler } from 'react';
 import style from '../../style/auth.module.scss';
 import { TRegisterForm } from '../../types/form/register-form.type';
 import getConfig from 'next/config'
-import { useSnackbar } from 'notistack';
+import {SnackbarKey, useSnackbar} from 'notistack';
 
 const { publicRuntimeConfig } = getConfig();
 
@@ -20,9 +20,9 @@ const RegisterPage: React.FC<{ goLogin: MouseEventHandler }> = ({ goLogin }) => 
         setRegisterForm({...registerForm, [e.target.name]: e.target.value})
     }
 
-    const register = async (): Promise<void> => {
+    const register = async (): Promise<void | SnackbarKey> => {
         if(registerForm.password !== registerForm.repeatPassword) {
-            enqueueSnackbar('passwords don\'t match', { variant: "error" })
+            return enqueueSnackbar('passwords don\'t match', { variant: "error" })
         }
         const response = await fetch(publicRuntimeConfig.backendUri + "/users", {
             method: "POST",

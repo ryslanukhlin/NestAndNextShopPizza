@@ -1,5 +1,5 @@
 import React, {MouseEventHandler} from 'react';
-import {Button, TextField, Typography} from "@material-ui/core";
+import {Button, TextField} from "@material-ui/core";
 import style from "../style/comment.module.scss";
 
 const CommentForm: React.FC<{ addComment: (txt: string, e: MouseEventHandler<HTMLButtonElement>) => void}> = ({ addComment }) => {
@@ -7,8 +7,8 @@ const CommentForm: React.FC<{ addComment: (txt: string, e: MouseEventHandler<HTM
 
     return (
         <>
-            <Typography className={style.commentTitle} variant="h6">2 комментария</Typography>
             <TextField
+                style={{marginTop: 15}}
                 value={txt}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTxt(e.target.value)}
                 label="Написать коментарий..."

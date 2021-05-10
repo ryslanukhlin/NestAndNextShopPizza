@@ -11,7 +11,7 @@ const { publicRuntimeConfig } = getConfig();
 
 const LoginPage: React.FC<{ goRegister: MouseEventHandler, handleClose: Function}> = ({ goRegister, handleClose }) => {
     const [remMe, setRemMe] = React.useState<boolean>(false);
-    const { LoginLocal, LoginGoogle } = useAction();
+    const { LoginLocal, LoginGoogle, setUserLocal } = useAction();
     const { enqueueSnackbar } = useSnackbar();
     const [loginForm, setLoginForm] = React.useState<TLoginForm>({
         email: "",
@@ -34,14 +34,34 @@ const LoginPage: React.FC<{ goRegister: MouseEventHandler, handleClose: Function
             enqueueSnackbar("invalid password or email", { variant: "error" });
         } else {
             const data = await response.json()
+            console.log(data)
             LoginLocal(data.access_token)
             handleClose()
             if (remMe) localStorage.setItem('token', data.access_token);
+            setUser(data.access_token)
         }
     }
 
-    const responseSuccessGoogle = (response: GoogleLoginResponse): void => {
-        LoginGoogle(response.accessToken)
+    const setUser = async (token: string) => {
+        const response = await fetch(publicRuntimeConfig.backendUri + "/auth", {
+            method: "GET",
+            headers: {
+                'Authorization': 'Bearer ' + token,
+            }
+        })
+        setUserLocal(await response.json());
+    }
+
+    const responseSuccessGoogle = async (resolve: GoogleLoginResponse): Promise<void> => {
+        const {email, name, googleId} = resolve.profileObj
+        const response = await fetch(publicRuntimeConfig.backendUri + '/users/google', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({email, googleId, nicname: name})
+        });
+        LoginGoogle(await response.json())
         handleClose()
     }
     

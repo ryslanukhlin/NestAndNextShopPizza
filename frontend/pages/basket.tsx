@@ -15,8 +15,8 @@ const Basket: React.FC = () => {
         setAllPrice()
     }, [basketPizza.length])
 
-    const toOrder = (): void => {
-        router.push('/order')
+    const toOrder = async (): Promise<void> => {
+        await router.push('/order')
     }
 
     if(basketPizza.length == 0){

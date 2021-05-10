@@ -5,6 +5,9 @@ import { useTypedSelector } from '../hooks/useTypeSelector'
 import style from "../style/catalog.module.scss"
 import { TPizza } from '../types/pizza.type'
 import {useRouter} from "next/dist/client/router";
+import getConfig from "next/config";
+
+const { publicRuntimeConfig } = getConfig();
 
 const CatalogItem: React.FC<{pizza: TPizza}> = ({pizza}) => {
     const router = useRouter()
@@ -24,7 +27,7 @@ const CatalogItem: React.FC<{pizza: TPizza}> = ({pizza}) => {
             <CardMedia 
                 className={style.CardImage}
                 title="Paella dish"
-                image={'http://localhost:8000/' + pizza.image}
+                image={publicRuntimeConfig.backendUri + '/' + pizza.image}
             />
             <CardContent className={style.cardContent}>
                 <Typography variant="h6">

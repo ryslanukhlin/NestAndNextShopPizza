@@ -3,7 +3,6 @@ import { Container, Grid } from '@material-ui/core'
 import style from "../style/catalog.module.scss"
 import CatalogItem from './CatalogItem';
 import { TPizza } from '../types/pizza.type';
-import io from "socket.io-client";
 
 
 const Catalog: React.FC<{pizza: TPizza[]}> = ({pizza}) => {
