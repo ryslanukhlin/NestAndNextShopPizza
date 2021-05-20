@@ -6,7 +6,7 @@ import { User, UserDocument } from './schema/user.schema';
 
 @Injectable()
 export class UsersService {
-    constructor(@InjectModel(User.name) private readonly userModel: Model<UserDocument>){}
+    constructor(@InjectModel(User.name) private readonly userModel: Model<UserDocument>) { }
 
     async createUser(userCreateDto: CreateUserDto): Promise<User> {
         return this.userModel.create(userCreateDto)
@@ -16,7 +16,11 @@ export class UsersService {
         return this.userModel.findOne({ email })
     }
 
-    async findOneById(id: string): Promise<User | undefined>  {
+    async findOneById(id: string): Promise<User | undefined> {
         return this.userModel.findById(id)
+    }
+
+    async downloadIcon(id: string, icon: string): Promise<User> {
+        return this.userModel.findById(id).updateOne({ icon })
     }
 }

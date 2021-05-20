@@ -2,6 +2,7 @@ export type TUser = {
     email: string
     googleId?: string
     password?: string
+    icon: string | null
     nicname: string
     type: string
     __v: number

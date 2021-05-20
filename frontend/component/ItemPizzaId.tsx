@@ -22,9 +22,9 @@ const ItemPizzaId: React.FC<{ data: TPizza }> = ({ data }) => {
                 <Typography variant="h5">Price: {data.price}</Typography>
                 <Typography paragraph>{data.description}</Typography>
                 {isAddBasket ?
-                    <Button onClick={addPizzaToBasket.bind(null, data)}>add basket</Button>
+                    <Button onClick={addPizzaToBasket.bind(null, data)}>Добавить</Button>
                     :
-                    <Button onClick={removePizzaToBasket.bind(null, data._id)}>remove basket</Button>
+                    <Button onClick={removePizzaToBasket.bind(null, data._id)}>Удалить</Button>
                 }
             </Grid>
         </Grid>

@@ -7,18 +7,18 @@ import { CommentDocument } from 'src/comments/comment.schema';
 
 @Injectable()
 export class ProductService {
-    constructor(@InjectModel(Product.name) private readonly productModel: Model<ProductDocument>){}
+    constructor(@InjectModel(Product.name) private readonly productModel: Model<ProductDocument>) { }
 
     async getPizza(): Promise<Product[]> {
         return this.productModel.find()
     }
 
     async getPizzaById(id: ProductDocument): Promise<Product> {
-        return this.productModel.findById(id).populate('comments')
+        return this.productModel.findById(id).populate({ path: "comments", populate: { path: "userId" } })
     }
 
     async createProduct(createProductDto: CreateProductDto, image: string): Promise<Product> {
-        return this.productModel.create({...createProductDto, image})
+        return this.productModel.create({ ...createProductDto, image })
     }
 
     async pushComment(productId: ProductDocument, commentId: CommentDocument): Promise<void> {

@@ -9,9 +9,9 @@ import { useTypedSelector } from '../hooks/useTypeSelector';
 import Auth from './Auth/Auth';
 
 const navbarItems = [
-    {txt: 'main', link: '/'},
-    {txt: 'catalog', link: '/catalog'},
-    {txt: 'blog', link: '/blog'},
+    {txt: 'Главная', link: '/'},
+    {txt: 'Контакты', link: '/catalog'},
+    {txt: 'Что-то ещё', link: '/blog'},
 ]
 
 const Navbar: React.FC = () => {
@@ -50,7 +50,7 @@ const Navbar: React.FC = () => {
                         </Badge>
                     </IconButton>
                     {isAuth?
-                        <IconButton onClick={router.push.bind(null, '/user')}>
+                        <IconButton onClick={async () => await router.push('/user')}>
                             <AccountCircleIcon />
                         </IconButton>
                     :

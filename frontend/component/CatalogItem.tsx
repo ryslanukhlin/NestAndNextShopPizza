@@ -42,11 +42,11 @@ const CatalogItem: React.FC<{pizza: TPizza}> = ({pizza}) => {
                     Price: {pizza.price}
                 </Typography>
                 {isAddBasket ?
-                    <Button onClick={addPizzaToBasket.bind(null, pizza)}>add basket</Button>
+                    <Button onClick={addPizzaToBasket.bind(null, pizza)}>Добавить</Button>
                     :
-                    <Button onClick={removePizzaToBasket.bind(null, pizza._id)}>remove basket</Button>
+                    <Button onClick={removePizzaToBasket.bind(null, pizza._id)}>Удалить</Button>
                 }
-                <Button onClick={goToIdPizza.bind(null, pizza._id)}>detailed</Button>
+                <Button onClick={goToIdPizza.bind(null, pizza._id)}>Подробнее</Button>
             </CardActions>
         </Card>
     )

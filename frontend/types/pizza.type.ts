@@ -1,4 +1,4 @@
-import {TUser} from "./reducer/userReducer.type";
+import { TUser } from "./reducer/userReducer.type";
 
 export type TComments = {
     _id: string

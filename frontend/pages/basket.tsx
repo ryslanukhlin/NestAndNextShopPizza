@@ -20,12 +20,12 @@ const Basket: React.FC = () => {
     }
 
     if(basketPizza.length == 0){
-        return <Typography className={style.basketTitle} variant="h2">Basket is null</Typography>
+        return <Typography className={style.basketTitle} variant="h2">Корзина пуста</Typography>
     }
 
     return (
         <Container maxWidth="md">
-            <Typography className={style.basketTitle} variant="h2">Basket</Typography>
+            <Typography className={style.basketTitle} variant="h2">Корзина</Typography>
             <List>
                 {basketPizza.map(pizza => 
                     <BasketItem key={pizza._id} pizza={pizza} />
@@ -33,8 +33,8 @@ const Basket: React.FC = () => {
             </List>
             <div className={style.customHr} />
             <div className={style.orderWrapper}>
-                <Typography style={{ flexGrow: 1 }} variant="h5">Total Price: {allPrice} ₽</Typography>
-                <Button variant="contained" color="secondary" onClick={toOrder}>Order</Button>
+                <Typography style={{ flexGrow: 1 }} variant="h5">Общая цена: {allPrice} ₽</Typography>
+                <Button variant="contained" color="secondary" onClick={toOrder}>Заказать</Button>
             </div>
         </Container>
     )   

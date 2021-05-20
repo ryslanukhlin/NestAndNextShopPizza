@@ -1,0 +1,28 @@
+.wrapper{
+    position: relative;
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+}
+
+.infoWrapper{
+    text-align: center;
+    position: absolute;
+    top: 70%;
+}
+
+.bgUser{
+    width: 100%;
+    height: 304px;
+}
+
+.photoUser{
+    border: 10px solid #fff;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+}
+
+.logout{
+    margin-top: 10px;
+}

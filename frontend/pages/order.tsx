@@ -57,14 +57,14 @@ const Order: React.FC = () => {
     
     return (
         <Container maxWidth="md">
-            <Typography className={style.orderTitle} variant="h2">Order</Typography>
+            <Typography className={style.orderTitle} variant="h2">Форма заказа</Typography>
             <TextField 
                 className={style.orderInput} 
                 value={formOrder.name}
                 onChange={formChange}
                 name="name"
                 fullWidth 
-                label="your name" 
+                label="Ваше имя" 
                 variant="outlined" 
             />
             <TextField 
@@ -73,7 +73,7 @@ const Order: React.FC = () => {
                 onChange={formChange}
                 name="adress"
                 fullWidth 
-                label="adress" 
+                label="Адресс" 
                 variant="outlined" 
             />
             <InputMask
@@ -82,7 +82,7 @@ const Order: React.FC = () => {
                 value={formOrder.tell}
                 onChange={formChange}
             >
-                <TextField label="tell"  fullWidth variant="outlined" type="tell" />
+                <TextField label="Телефон"  fullWidth variant="outlined" type="tell" />
             </InputMask>
             <TextField 
                 className={style.orderInput} 
@@ -92,11 +92,11 @@ const Order: React.FC = () => {
                 fullWidth 
                 multiline 
                 rows={4} 
-                label="optionst"
+                label="Опции"
                 variant="outlined" 
             />
             <div className={style.actions}>
-                <Button variant="contained" color="secondary" onClick={addOrder}>Order</Button>
+                <Button variant="contained" color="secondary" onClick={addOrder}>Отправить</Button>
             </div>
         </Container>
     )

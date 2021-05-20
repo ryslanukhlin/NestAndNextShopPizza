@@ -59,7 +59,7 @@ const RegisterPage: React.FC<{ goLogin: MouseEventHandler }> = ({ goLogin }) => 
                 margin="normal"
                 required
                 fullWidth
-                label="Nicname"
+                label="Никнейм"
                 name="nicname"
             />
             <TextField
@@ -70,7 +70,7 @@ const RegisterPage: React.FC<{ goLogin: MouseEventHandler }> = ({ goLogin }) => 
                 margin="normal"
                 required
                 fullWidth
-                label="Email"
+                label="Почта"
                 name="email"
             />
             <TextField
@@ -82,7 +82,7 @@ const RegisterPage: React.FC<{ goLogin: MouseEventHandler }> = ({ goLogin }) => 
                 required
                 fullWidth
                 name="password"
-                label="Password"
+                label="Пароль"
                 type="password"
             />
             <TextField
@@ -94,7 +94,7 @@ const RegisterPage: React.FC<{ goLogin: MouseEventHandler }> = ({ goLogin }) => 
                 required
                 fullWidth
                 name="repeatPassword"
-                label="Repeat-password"
+                label="Повторите пароль"
                 type="password"
             />
             <Button
@@ -104,13 +104,13 @@ const RegisterPage: React.FC<{ goLogin: MouseEventHandler }> = ({ goLogin }) => 
                 variant="contained"
                 color="primary"
             >
-                Sign Up
+                Зарегестрироваться
             </Button>
             <Grid container className={style.modalFooter}>
                 <Grid item xs />
                 <Grid item>
                     <Typography className={style.customLink} variant="inherit" onClick={goLogin}>
-                        Do have an account? Sign In
+                        Вы имеете аккаунт? Войдите
                     </Typography>
                 </Grid>
             </Grid>

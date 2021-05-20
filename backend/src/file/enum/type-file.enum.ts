@@ -1,3 +1,4 @@
 export enum FuleTypeEnum {
-    image = 'image'
+    image = 'image',
+    icon = "icon"
 }

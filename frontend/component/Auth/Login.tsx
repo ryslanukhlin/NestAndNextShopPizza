@@ -34,7 +34,6 @@ const LoginPage: React.FC<{ goRegister: MouseEventHandler, handleClose: Function
             enqueueSnackbar("invalid password or email", { variant: "error" });
         } else {
             const data = await response.json()
-            console.log(data)
             LoginLocal(data.access_token)
             handleClose()
             if (remMe) localStorage.setItem('token', data.access_token);
@@ -81,7 +80,7 @@ const LoginPage: React.FC<{ goRegister: MouseEventHandler, handleClose: Function
                 required
                 fullWidth
                 id="email"
-                label="Email Address"
+                label="Почта"
                 name="email"
                 autoComplete="email"
             />
@@ -94,7 +93,7 @@ const LoginPage: React.FC<{ goRegister: MouseEventHandler, handleClose: Function
                 required
                 fullWidth
                 name="password"
-                label="Password"
+                label="Пароль"
                 type="password"
                 id="password"
                 autoComplete="current-password"
@@ -103,7 +102,7 @@ const LoginPage: React.FC<{ goRegister: MouseEventHandler, handleClose: Function
                 value={remMe}
                 onChange={setRemMe.bind(null, prev => !prev)}
                 control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
+                label="Запомнить меня"
             />
             <Button
                 onClick={login}
@@ -112,20 +111,20 @@ const LoginPage: React.FC<{ goRegister: MouseEventHandler, handleClose: Function
                 variant="contained"
                 color="primary"
             >
-                Sign In
+                Войти
             </Button>
             <Grid container className={style.modalFooter}>
                 <Grid item xs />
                 <Grid item>
                     <Typography className={style.customLink} variant="inherit" onClick={goRegister}>
-                        Don't have an account? Sign Up
+                        У вас нет учетной записи? Зарегестрироваться
                     </Typography>
                 </Grid>
             </Grid>
             <GoogleLogin
                 className={style.auth__google}
                 clientId="1039089113540-k5pkcpnsa4eq6446risiup8sh6cn418g.apps.googleusercontent.com"
-                buttonText="Login"
+                buttonText="Войти через google"
                 onSuccess={responseSuccessGoogle}
                 onFailure={responseErrorGoogle}
                 cookiePolicy={'single_host_origin'}

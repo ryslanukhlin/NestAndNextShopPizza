@@ -32,6 +32,7 @@ const PagesPizza: React.FC<{ data: TPizza }> = ({ data}) => {
 
     const addComment = (text: string, e: React.MouseEventHandler<HTMLButtonElement>) => {
         if (!isAuth) return enqueueSnackbar("Чтобы добавить кометарий вы должны войти", { variant: "error" })
+        if (text === "") return enqueueSnackbar("Введите что-нибудь", { variant: "error" })
         socketRef.current.emit('COMMENT:ADD', {
             text,
             userId: user._id,
