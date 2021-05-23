@@ -52,14 +52,14 @@ const LoginPage: React.FC<{ goRegister: MouseEventHandler, handleClose: Function
     }
 
     const responseSuccessGoogle = async (resolve: GoogleLoginResponse): Promise<void> => {
-        const {email, name, googleId} = resolve.profileObj
+        const {email, name, googleId, imageUrl} = resolve.profileObj
         const response = await fetch(publicRuntimeConfig.backendUri + '/users/google', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({email, googleId, nicname: name})
-        });
+            body: JSON.stringify({email, googleId, nicname: name, icon: imageUrl})
+        })
         LoginGoogle(await response.json())
         handleClose()
     }

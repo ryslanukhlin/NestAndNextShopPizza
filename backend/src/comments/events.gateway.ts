@@ -10,7 +10,7 @@ import { CommentAddDto } from "./dto/CommentAdd.dto";
 import { ProductService } from "../product/product.service";
 
 @WebSocketGateway()
-export class EventsGateway implements OnGatewayConnection, OnGatewayDisconnect {
+export class EventsGateway{
     constructor(private commentService: CommentsService,
         private productService: ProductService) { }
 
@@ -27,13 +27,5 @@ export class EventsGateway implements OnGatewayConnection, OnGatewayDisconnect {
         const Product = await this.productService.getPizzaById(productId)
         this.wss.to(productId).emit('COMMENT:REFRESH', Product)
         return comment
-    }
-
-    handleConnection(client: Socket, ...args): any {
-        console.log('Пользователь вошел в чат')
-    }
-
-    handleDisconnect(client: Socket): any {
-        console.log('какойто шнырь вышел', client.id)
     }
 }

@@ -4,7 +4,7 @@ export type TUser = {
     password?: string
     icon: string | null
     nicname: string
-    type: string
+    type: EnumLoginType
     __v: number
     _id: string
 }

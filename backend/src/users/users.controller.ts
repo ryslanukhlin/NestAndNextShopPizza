@@ -4,6 +4,7 @@ import { CreateUserDto } from "./dto/user-create.dto";
 import { FileInterceptor } from '@nestjs/platform-express';
 import { FileService } from 'src/file/file.service';
 import { FuleTypeEnum } from 'src/file/enum/type-file.enum';
+import { CreateGoogleUserDto } from './dto/google-user.dto';
 
 
 @Controller('users')
@@ -21,5 +22,10 @@ export class UsersController {
         const iconName = await this.fileService.createImage(icon, FuleTypeEnum.icon)
         await this.usersService.downloadIcon(id, iconName)
         return await this.usersService.findOneById(id)
+    }
+
+    @Post('google')
+    async getOrCreateGoogleUser(@Body() createGoogleUserDto: CreateGoogleUserDto){
+        return await this.usersService.createGoogleUser(createGoogleUserDto)
     }
 }

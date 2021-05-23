@@ -50,7 +50,7 @@ const user: NextPage = () => {
             <div className={style.infoWrapper}>
                 <img 
                     className={style.photoUser}
-                    src={user?.icon ? publicRuntimeConfig.backendUri + "/" + user.icon : "/dontIconUser.png"} 
+                    src={user?.icon ? user.icon : "/dontIconUser.png"} 
                     alt="фотография пользователя" 
                 />
                 <div className="downloadPhoto" style={{marginBottom: 10}}>
@@ -68,8 +68,8 @@ const user: NextPage = () => {
                         </Button>
                     </label>
                 </div>
-                <Typography variant="h5">Ник: {user.nicname}</Typography>
-                <Typography variant="h6">Почта: {user.email}</Typography>
+                <Typography variant="h5">Ник: {user?.nicname}</Typography>
+                <Typography variant="h6">Почта: {user?.email}</Typography>
                 <Button className={style.logout} variant="outlined" onClick={logout}>Выйти</Button>
             </div>
         </Container>

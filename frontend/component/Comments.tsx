@@ -13,11 +13,7 @@ const Comments: React.FC<{ comments: TComments[] }> = ({ comments }) => {
             {comments.map((comment: TComments) =>
                 <ListItem key={comment._id}>
                     <ListItemAvatar>
-                        <Avatar src={comment.userId.icon?
-                            publicRuntimeConfig.backendUri + "/" + comment.userId.icon
-                            :
-                            "/dontIconUser.png"} 
-                        />
+                        <Avatar src={comment.userId.icon ? comment.userId.icon : "/dontIconUser.png"} />
                     </ListItemAvatar>
                     <ListItemText primary={comment.userId.nicname} secondary={comment.text} />
                 </ListItem>
