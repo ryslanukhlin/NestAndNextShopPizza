@@ -1,5 +1,5 @@
 module.exports = {
     publicRuntimeConfig: {
-        backendUri: 'http://localhost:8000',
+        backendUri: 'http://37.228.117.102:5000', // поменял для деплоя
     },
 }

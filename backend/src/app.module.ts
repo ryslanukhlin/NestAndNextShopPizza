@@ -13,18 +13,18 @@ import * as path from 'path';
 @Module({
     imports: [
         ConfigModule.forRoot({
-            isGlobal: true
+            isGlobal: true,
         }),
         MongooseModule.forRoot(process.env.mongodbUri),
         ServeStaticModule.forRoot({
-            rootPath: path.resolve(__dirname, 'static')
+            rootPath: path.resolve(__dirname + '/static'),
         }),
         ProductModule,
         FileModule,
         OrderModule,
         AuthModule,
         UsersModule,
-        CommentsModule
-    ]
+        CommentsModule,
+    ],
 })
 export class AppModule {}
